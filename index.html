@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webRTC Lab</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <main>
+      <h1 class="text-center">webRTC Lab</h1>
+      <!-- SDP info section -->
+      <section class="two-column-grid spd-section-container">
+        <div class="sdp-section-wrapper">
+          <div class="label">Local :</div>
+          <textarea
+            name=""
+            id="sdp-local-textarea"
+            cols="30"
+            rows="10"
+            class="textarea"></textarea>
+            <div class="sdp-btns-wrapper">
+              <button id="sdp-local-signal-btn" class="btn primary-btn">signal*</button>
+              <button id="sdp-local-copy-btn" class="btn secondary-btn">copy</button>
+            </div>
+        </div>
+        <div class="sdp-section-wrapper">
+          <div class="label">Remote :</div>
+          <textarea
+            name=""
+            id="sdp-remote-textarea"
+            cols="30"
+            rows="10"
+            class="textarea"></textarea>
+             <div class="sdp-btns-wrapper">
+               <button id="sdp-remote-signal-btn" class="btn primary-btn">signal*</button>
+               <button id="sdp-remote-copy-btn" class="btn secondary-btn">copy</button>
+             </div>
+        </div>
+      </section>
+      <hr>
+      <!-- connection section -->
+      <div class="two-column-grid">
+        <h3 id="connection-local-status" >Local Status : --</h3>
+        <h3 id="connection-remote-status" >Remote Status : --</h3>
+      </div>
+      <hr>
+      <!-- start and stop -->
+      <section class="justify-center connection-status-container">
+        <button id="connection-start-btn" class="btn primary-btn">start</button>
+        <button id="connection-stop-btn" class="btn ghost-btn">close</button>
+      </section>
+
+      <hr>
+
+      <!-- texting - section -->
+      <section class="two-column-grid texting-section-container">
+        <div>
+          <div class="label">Receiver :</div>
+          <textarea
+            name=""
+            id="text-input-local"
+            cols="30"
+            rows="10"
+            class="textarea"></textarea>
+          <div class="label">Sender :</div>
+
+          <textarea
+            name=""
+            id="text-output-local"
+            cols="30"
+            rows="10"
+            class="textarea"></textarea>
+          <button id="message-local-send-btn" class="btn primary-btn">
+            send
+          </button>
+        </div>
+        <div>
+          <div class="label">Receiver :</div>
+          <textarea
+            name=""
+            id="text-input-remote"
+            cols="30"
+            rows="10"
+            class="textarea"></textarea>
+          <div class="label">Sender :</div>
+          <textarea
+            name=""
+            id="text-output-remote"
+            cols="30"
+            rows="10"
+            class="textarea"></textarea>
+          <button id="message-remote-send-btn" class="btn primary-btn">
+            send
+          </button>
+        </div>
+      </section>
+
+      <!-- video - section -->
+      <section class="two-column-grid video-section-container">
+        <div class="video-section-wrapper">
+          <div>
+            <div class="label">Local :</div>
+            <video id="video-player-local" autoplay></video>
+          </div>
+          <div class="player-btns">
+            <button id="video-hangup-local-btn" class="btn primary-btn">
+              call
+            </button>
+            <button id="video-hangup-local-btn" class="btn secondary-btn">
+              hang up
+            </button>
+          </div>
+        </div>
+        <div class="video-section-wrapper">
+          <div>
+            <div class="label">Remote :</div>
+            <video id="video-player-remote" autoplay></video>
+          </div>
+          <div class="player-btns">
+            <button id="video-hangup-remote-btn" class="btn primary-btn">
+              call
+            </button>
+            <button id="video-hangup-remote-btn" class="btn secondary-btn">
+              hang up
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- calling - section -->
+      <section class="two-column-grid calling-section-container">
+        <div>
+          <div class="label">Local :</div>
+          <audio id="audio-player-local" controls></audio>
+          <div class="player-btns">
+            <button id="audio-call-local-btn" class="btn primary-btn">
+              call
+            </button>
+            <button id="audio-hangup-local-btn" class="btn secondary-btn">
+              hang up
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="label">Remote :</div>
+          <audio id="audio-player-remote" controls></audio>
+          <div class="player-btns">
+            <button id="audio-call-remote-btn" class="btn primary-btn">
+              call
+            </button>
+            <button id="audio-hangup-remote-btn" class="btn secondary-btn">
+              hang up
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </body>
+  <script src="./js/index.js"></script>
+</html>
