@@ -25,6 +25,8 @@ const messageOutputRemote = document.getElementById("text-output-remote")
 const messageInputLocal = document.getElementById("text-input-local")
 const messageOutputLocal = document.getElementById("text-output-local")
 
+const videoPlayerLocal = document.getElementById("video-player-local")
+const videoPlayerRemote = document.getElementById("video-player-remote")
 
 // variables
 let localStream, localPeerConnection, remotePeerConnection;
@@ -50,7 +52,7 @@ const getUserMedia = async (constraints) => {
   }
 }
 
-// getUserMedia(constraints)
+getUserMedia(constraints)
 
 //peer connection
 localPeerConnection = new RTCPeerConnection()
@@ -86,6 +88,14 @@ const localSignal = async ()=>{
     messageOutputLocal.value = event.data
   }
 
+
+  // add video track
+  for (track of localStream.getTracks()) {
+    localPeerConnection.addTrack(track, localStream)
+  }
+
+  videoPlayerLocal.srcObject = localStream
+
   // create offer
   try {
     offer = await localPeerConnection.createOffer()
@@ -110,6 +120,15 @@ const remoteSignal = async ()=>{
     }
   }
 
+  // remote video track
+  remotePeerConnection.ontrack = (event)=>{
+
+    if(event.streams && event.streams[0]){
+      videoPlayerRemote.srcObject = event.streams[0]
+    }
+
+  }
+
   // remote channel
   remotePeerConnection.ondatachannel = (event)=>{
     remoteDataChannel = event.channel
@@ -131,6 +150,7 @@ const remoteSignal = async ()=>{
     remoteDataChannel.onmessage = (event)=>{
       messageOutputRemote.value = event.data
     }
+
   }
 
   remotePeerConnection.setRemoteDescription(JSON.parse(SDPRemoteTextarea.value))
@@ -164,6 +184,8 @@ const stop = ()=>{
 
   SDPLocalTextarea.value = ''
   SDPRemoteTextarea.value = ''
+
+  localStream.removeTrack(localStream.getTracks()[0])
 
   connectionStopBtn.disabled = true
 }
@@ -206,10 +228,6 @@ const sendMessageFromRemote = ()=>{
 
 messageSendBtnLocal.onclick = sendMessageFromLocal
 messageSendBtnRemote.onclick = sendMessageFromRemote
-
-
-
-
 
 function log(text) {
   console.log(text)
