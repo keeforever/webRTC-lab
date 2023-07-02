@@ -14,6 +14,18 @@ const connectionStopBtn = document.getElementById("connection-stop-btn")
 const connectionStatusLocal = document.getElementById("connection-local-status")
 const connectionStatusRemote = document.getElementById("connection-remote-status")
 
+
+const messageSendBtnLocal = document.getElementById("message-local-send-btn")
+const messageSendBtnRemote = document.getElementById("message-remote-send-btn")
+
+
+const messageInputRemote = document.getElementById("text-input-remote")
+const messageOutputRemote = document.getElementById("text-output-remote")
+
+const messageInputLocal = document.getElementById("text-input-local")
+const messageOutputLocal = document.getElementById("text-output-local")
+
+
 // variables
 let localStream, localPeerConnection, remotePeerConnection;
 
@@ -26,7 +38,8 @@ let server = null;
 
 let offer, answer;
 
-let remoteDataChannel;
+// channel
+let localDataChannel, remoteDataChannel;
 
 
 const getUserMedia = async (constraints) => {
@@ -46,7 +59,6 @@ remotePeerConnection = new RTCPeerConnection()
 // local signal
 const localSignal = async ()=>{
 
-
   localPeerConnection.onicecandidate = (event) => {
     if (event.candidate) {
       offer = JSON.stringify(localPeerConnection.localDescription)
@@ -54,20 +66,24 @@ const localSignal = async ()=>{
   }
 
   // create channel
-  const dataChannel = localPeerConnection.createDataChannel("senderChannel")
+  localDataChannel = localPeerConnection.createDataChannel("senderChannel")
 
-  dataChannel.onopen = () => {
+  localDataChannel.onopen = () => {
     connectionStatusUpdate({
       type: "local",
       message: 'Opened !'
     })
   }
 
-  dataChannel.onclose = () => {
+  localDataChannel.onclose = () => {
     connectionStatusUpdate({
       type: "local",
       message: 'Closed !'
     })
+  }
+
+  localDataChannel.onmessage = (event)=>{
+    messageOutputLocal.value = event.data
   }
 
   // create offer
@@ -110,6 +126,10 @@ const remoteSignal = async ()=>{
         type: "remote",
         message: 'Closed !'
       })
+    }
+
+    remoteDataChannel.onmessage = (event)=>{
+      messageOutputRemote.value = event.data
     }
   }
 
@@ -172,6 +192,24 @@ SDPRemoteCopyBtn.onclick = ()=>{
   }
   alert("Signal required!")
 }
+
+// texting 
+const sendMessageFromLocal = ()=>{
+  const message = messageInputLocal.value
+  localDataChannel.send(message)
+}
+
+const sendMessageFromRemote = ()=>{
+  const message = messageInputRemote.value
+  remoteDataChannel.send(message)
+}
+
+messageSendBtnLocal.onclick = sendMessageFromLocal
+messageSendBtnRemote.onclick = sendMessageFromRemote
+
+
+
+
 
 function log(text) {
   console.log(text)
