@@ -39,11 +39,13 @@ const getUserMedia = async (constraints) => {
 
 // getUserMedia(constraints)
 
+//peer connection
+localPeerConnection = new RTCPeerConnection()
+remotePeerConnection = new RTCPeerConnection()
+
 // local signal
 const localSignal = async ()=>{
 
-  // local peer connection
-  localPeerConnection = new RTCPeerConnection()
 
   localPeerConnection.onicecandidate = (event) => {
     if (event.candidate) {
@@ -85,8 +87,6 @@ const remoteSignal = async ()=>{
     return alert("Local SDP Required !")
   }
 
-  // remote peer connection
-  remotePeerConnection = new RTCPeerConnection()
 
   remotePeerConnection.onicecandidate = (event)=>{
     if(event.candidate){
@@ -126,7 +126,7 @@ const remoteSignal = async ()=>{
 
 // start and stop - buttons
 const start = async () => {
-  if(SDPLocalTextarea.value && SDPRemoteTextarea.value){
+  if(SDPLocalTextarea.value ){
     localPeerConnection.setRemoteDescription(JSON.parse(SDPLocalTextarea.value))
     return
   }
@@ -178,7 +178,7 @@ function log(text) {
 }
 
 function connectionStatusUpdate ({type, message}){
-  
+
   if(type == "local"){
     connectionStatusLocal.innerHTML =  "Local Status : " + message
   }
