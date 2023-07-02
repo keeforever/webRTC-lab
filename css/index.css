@@ -166,7 +166,10 @@ hr{
 /* others */
 
 main{
+  min-width: 660px;
+  max-width: 1444px ;
   padding: 32px 16px;
+  margin: 0 auto;
 }
 
 .spd-section-container{
