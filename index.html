@@ -12,7 +12,7 @@
       <!-- SDP info section -->
       <section class="two-column-grid spd-section-container">
         <div class="sdp-section-wrapper">
-          <div class="label">Local :</div>
+          <div class="label">Client - A</div>
           <textarea
             name=""
             id="sdp-local-textarea"
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="sdp-section-wrapper">
-          <div class="label">Remote :</div>
+          <div class="label">Client - B</div>
           <textarea
             name=""
             id="sdp-remote-textarea"
@@ -39,10 +39,10 @@
         </div>
       </section>
       <hr>
-      <!-- connection section -->
+      <!-- connection status section -->
       <div class="two-column-grid">
-        <h3 id="connection-local-status" >Local Status : --</h3>
-        <h3 id="connection-remote-status" >Remote Status : --</h3>
+        <h3 id="connection-local-status" >Client - A Status : --</h3>
+        <h3 id="connection-remote-status" >Client - B Status : --</h3>
       </div>
       <hr>
       <!-- start and stop -->
@@ -102,7 +102,7 @@
       <section class="two-column-grid video-section-container">
         <div class="video-section-wrapper">
           <div>
-            <div class="label">Local :</div>
+            <div class="label">Client - A</div>
             <video id="video-player-local" autoplay></video>
           </div>
           <!-- <div class="player-btns">
@@ -116,7 +116,7 @@
         </div>
         <div class="video-section-wrapper">
           <div>
-            <div class="label">Remote :</div>
+            <div class="label">Client - B</div>
             <video id="video-player-remote" autoplay></video>
           </div>
           <!-- <div class="player-btns">
@@ -133,7 +133,7 @@
       <!-- calling - section -->
       <section class="two-column-grid calling-section-container">
         <div>
-          <div class="label">Local :</div>
+          <div class="label">Client - A</div>
           <audio id="audio-player-local" controls></audio>
           <!-- <div class="player-btns">
             <button id="audio-call-local-btn" class="btn primary-btn">
@@ -145,7 +145,7 @@
           </div> -->
         </div>
         <div>
-          <div class="label">Remote :</div>
+          <div class="label">Client - B</div>
           <audio id="audio-player-remote" controls></audio>
           <!-- <div class="player-btns">
             <button id="audio-call-remote-btn" class="btn primary-btn">

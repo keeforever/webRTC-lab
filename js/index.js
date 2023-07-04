@@ -236,10 +236,10 @@ function log(text) {
 function connectionStatusUpdate ({type, message}){
 
   if(type == "local"){
-    connectionStatusLocal.innerHTML =  "Local Status : " + message
+    connectionStatusLocal.innerHTML =  "Client - A Status : " + message
   }
 
   if(type == "remote"){
-    connectionStatusRemote.innerHTML =  "Remote Status : " + message
+    connectionStatusRemote.innerHTML =  "Client - B Status : " + message
   }
 }
